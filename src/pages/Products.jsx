@@ -118,10 +118,10 @@ function ProductActions({ product, onView, onEdit, onDelete }) {
 
 function ProductCard({ product, actions }) {
   return (
-    <article className="rounded-2xl border border-white/10 bg-white/[0.09] p-5">
+    <article className="rounded-2xl border border-white/10 bg-white/[0.09] p-5 shadow-xl shadow-black/15 backdrop-blur-md">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h2 className="font-semibold">{product.name}</h2>
+          <h2 className="font-semibold text-white">{product.name}</h2>
 
           <p className="mt-1 text-sm text-white/60">
             {product.sku}
@@ -134,17 +134,17 @@ function ProductCard({ product, actions }) {
       <dl className="mt-5 grid grid-cols-2 gap-4 text-sm">
         <div>
           <dt className="text-white/50">Category</dt>
-          <dd className="mt-1">{product.categoryName}</dd>
+          <dd className="mt-1 text-white/80">{product.categoryName}</dd>
         </div>
 
         <div>
           <dt className="text-white/50">Quantity</dt>
-          <dd className="mt-1">{product.quantity}</dd>
+          <dd className="mt-1 text-white/80">{product.quantity}</dd>
         </div>
 
         <div>
           <dt className="text-white/50">Unit Price</dt>
-          <dd className="mt-1">
+          <dd className="mt-1 text-white/80">
             {formatPrice(product.unitPrice)}
           </dd>
         </div>
@@ -157,9 +157,9 @@ function ProductCard({ product, actions }) {
 
 function ProductTable({ products, getActions }) {
   return (
-    <div className="hidden overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.09] md:block">
-      <table className="w-full min-w-[850px] text-left">
-        <thead className="border-b border-white/10 text-xs uppercase text-white/55">
+    <div className="hidden overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.09] shadow-xl shadow-black/15 backdrop-blur-md md:block">
+      <table className="w-full min-w-[850px] text-left text-sm">
+        <thead className="border-b border-white/10 bg-white/[0.04] text-xs uppercase tracking-wider text-white/55">
           <tr>
             {[
               "Product Name",
@@ -170,7 +170,7 @@ function ProductTable({ products, getActions }) {
               "Stock Status",
               "Actions",
             ].map((heading) => (
-              <th key={heading} className="px-5 py-4">
+              <th key={heading} className="px-5 py-4 font-semibold">
                 {heading}
               </th>
             ))}
@@ -183,7 +183,7 @@ function ProductTable({ products, getActions }) {
               key={product.id}
               className="transition hover:bg-white/[0.05]"
             >
-              <td className="px-5 py-4 font-semibold">
+              <td className="px-5 py-4 font-semibold text-white">
                 {product.name}
               </td>
 
@@ -191,15 +191,15 @@ function ProductTable({ products, getActions }) {
                 {product.sku}
               </td>
 
-              <td className="px-5 py-4">
+              <td className="px-5 py-4 text-white/70">
                 {product.categoryName}
               </td>
 
-              <td className="px-5 py-4">
+              <td className="px-5 py-4 text-white/70">
                 {product.quantity}
               </td>
 
-              <td className="px-5 py-4">
+              <td className="px-5 py-4 text-white/70">
                 {formatPrice(product.unitPrice)}
               </td>
 
@@ -407,42 +407,43 @@ function Products() {
   };
 
   return (
-    <main className="min-h-screen bg-[#160b2a] px-4 py-8 text-white sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <header className="flex flex-col justify-between gap-5 rounded-2xl border border-white/10 bg-white/[0.09] p-6 sm:flex-row sm:items-end">
+    <main className="relative min-h-screen overflow-hidden bg-[#160b2a] px-4 py-8 font-sans text-white sm:px-6 lg:px-8">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,#8b263d_0%,transparent_38%),radial-gradient(circle_at_92%_86%,#4767c8_0%,transparent_34%),radial-gradient(circle_at_5%_92%,#763a51_0%,transparent_36%)]" />
+      <div className="relative mx-auto max-w-7xl">
+        <header className="flex flex-col justify-between gap-5 rounded-2xl border border-white/10 bg-white/[0.09] p-6 shadow-xl shadow-black/15 backdrop-blur-md sm:flex-row sm:items-end sm:p-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-indigo-200">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-200">
               Inventory
             </p>
 
-            <h1 className="mt-2 text-3xl font-bold">
+            <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
               Products
             </h1>
 
-            <p className="mt-2 text-sm text-white/70">
-              Browse and manage your inventory products.
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-white/70">
+              Manage your product catalogue, stock levels, and pricing.
             </p>
           </div>
 
           <button
             type="button"
             onClick={() => navigate("/products/add")}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold transition hover:bg-indigo-500"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#56052e] via-[#61285e] to-[#5d75dc] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-950/30 transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-white/70"
           >
             <Plus size={18} />
             Add Product
           </button>
         </header>
 
-        <section className="mt-6 rounded-2xl border border-white/10 bg-white/[0.09] p-5">
-          <div className="flex items-center gap-2 text-sm font-semibold">
+        <section className="mt-6 rounded-2xl border border-white/10 bg-white/[0.09] p-4 shadow-xl shadow-black/15 backdrop-blur-md sm:p-5">
+          <div className="flex items-center gap-2 text-sm font-semibold text-white/90">
             <SlidersHorizontal size={17} />
             Find products
           </div>
 
           <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             <label className="relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-white/45" />
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/45" />
 
               <input
                 type="search"
@@ -452,7 +453,7 @@ function Products() {
                   resetPage();
                 }}
                 placeholder="Search products"
-                className="w-full rounded-xl border border-white/15 bg-white/[0.08] py-3 pl-10 pr-4 text-sm outline-none transition focus:border-indigo-400"
+                className="w-full rounded-xl border border-white/15 bg-white/[0.08] py-3 pl-10 pr-4 text-sm text-white outline-none transition placeholder:text-white/40 focus:border-indigo-200/80 focus:ring-2 focus:ring-indigo-200/30"
               />
             </label>
 
@@ -462,9 +463,12 @@ function Products() {
                 setCategory(event.target.value);
                 resetPage();
               }}
-              className="rounded-xl border border-white/15 bg-white/[0.08] px-3 py-3 text-sm outline-none transition focus:border-indigo-400"
+              className="w-full rounded-xl border border-white/15 bg-white/[0.08] px-3 py-3 text-sm text-white outline-none transition focus:border-indigo-200/80 focus:ring-2 focus:ring-indigo-200/30"
             >
-              <option value="All categories">
+              <option
+                value="All categories"
+                className="bg-[#2b2345] text-white"
+              >
                 All categories
               </option>
 
@@ -472,7 +476,7 @@ function Products() {
                 <option
                   key={item.id}
                   value={item.id}
-                  className="text-slate-900"
+                  className="bg-[#2b2345] text-white"
                 >
                   {item.name}
                 </option>
@@ -485,13 +489,13 @@ function Products() {
                 setStockStatus(event.target.value);
                 resetPage();
               }}
-              className="rounded-xl border border-white/15 bg-white/[0.08] px-3 py-3 text-sm outline-none transition focus:border-indigo-400"
+              className="rounded-xl border border-white/15 bg-white/[0.08] px-3 py-3 text-sm text-white outline-none transition focus:border-indigo-200/80 focus:ring-2 focus:ring-indigo-200/30"
             >
               {stockOptions.map((option) => (
                 <option
                   key={option}
                   value={option}
-                  className="text-slate-900"
+                  className="bg-[#2b2345] text-white"
                 >
                   {option}
                 </option>
@@ -504,13 +508,13 @@ function Products() {
                 setSortBy(event.target.value);
                 resetPage();
               }}
-              className="rounded-xl border border-white/15 bg-white/[0.08] px-3 py-3 text-sm outline-none transition focus:border-indigo-400"
+              className="rounded-xl border border-white/15 bg-white/[0.08] px-3 py-3 text-sm text-white outline-none transition focus:border-indigo-200/80 focus:ring-2 focus:ring-indigo-200/30"
             >
               {sortOptions.map((option) => (
                 <option
                   key={option.value}
                   value={option.value}
-                  className="text-slate-900"
+                  className="bg-[#2b2345] text-white"
                 >
                   {option.label}
                 </option>
@@ -520,13 +524,13 @@ function Products() {
         </section>
 
         {categoryLoadError && (
-          <p role="alert" className="mt-3 text-sm text-rose-200">
+          <p role="alert" className="mt-4 rounded-xl border border-rose-200/20 bg-rose-300/15 px-4 py-3 text-sm text-rose-100">
             Unable to load category filters: {categoryLoadError}
           </p>
         )}
 
         {error && (
-          <p className="mt-5 rounded-xl bg-rose-500/15 p-4 text-sm text-rose-200">
+          <p className="mt-4 rounded-xl border border-rose-200/20 bg-rose-300/15 px-4 py-3 text-sm text-rose-100">
             {error}
           </p>
         )}
@@ -535,8 +539,8 @@ function Products() {
           {loading ? (
             <ProductsTableSkeleton />
           ) : visibleProducts.length === 0 ? (
-            <div className="rounded-2xl border border-white/10 bg-white/[0.09] p-12 text-center">
-              <PackageSearch className="mx-auto" size={32} />
+            <div className="rounded-2xl border border-white/10 bg-white/[0.09] p-12 text-center shadow-xl shadow-black/15 backdrop-blur-md">
+              <PackageSearch className="mx-auto text-white/50" size={32} />
 
               <h2 className="mt-4 text-xl font-semibold">
                 No products found
@@ -575,7 +579,7 @@ function Products() {
                     onClick={() =>
                       setPage((currentPage) => currentPage - 1)
                     }
-                    className="rounded-lg border border-white/15 px-3 py-2 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="rounded-xl border border-white/15 px-4 py-2 text-sm transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     Previous
                   </button>
@@ -586,7 +590,7 @@ function Products() {
                     onClick={() =>
                       setPage((currentPage) => currentPage + 1)
                     }
-                    className="rounded-lg border border-white/15 px-3 py-2 transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
+                    className="rounded-xl border border-white/15 px-4 py-2 text-sm transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
                   >
                     Next
                   </button>

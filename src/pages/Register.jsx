@@ -56,7 +56,7 @@ function Register() {
       const response = await login(details);
 
       saveAuthToken(response);
-      navigate("/dashboard", { replace: true });
+      navigate("/login", { replace: true });
     } catch (error) {
       setErrors({
         submit:
